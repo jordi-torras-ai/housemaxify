@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>House Maxify | Smart Real Estate Insights</title>
+    <link rel="stylesheet" href="{{ url_for('css', filename='styles.css') }}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-bar">
+        <div class="brand">
+          <span class="brand-mark">HM</span>
+          <span class="brand-name">House Maxify</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#insights">Market Insights</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-content">
+          <div class="hero-copy">
+            <h1>Unlock Your Next Home Opportunity</h1>
+            <p>
+              House Maxify helps buyers and sellers make smarter decisions with
+              data-driven price estimates powered by our XGBoost AI model.
+            </p>
+            <a class="cta-button" href="{{ url_for('estimate') }}">
+              Get Free Price Estimate
+            </a>
+          </div>
+          <div class="hero-card">
+            <h2>Why House Maxify?</h2>
+            <ul>
+              <li>Personalized valuations in seconds</li>
+              <li>Accurate predictions trained on Seattle market data</li>
+              <li>Expert advisors ready to help you move fast</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="section services">
+        <div class="container section-grid">
+          <article class="card">
+            <h3>Buy with Confidence</h3>
+            <p>
+              Receive curated listings and tailored guidance to secure your next
+              home at the right price.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Sell for More</h3>
+            <p>
+              Understand market demand, optimize timing, and price your property
+              with precision.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Real-Time Analytics</h3>
+            <p>
+              Access actionable insights and neighborhood trends to stay ahead
+              of the market.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="insights" class="section insights">
+        <div class="container section-grid">
+          <div class="insights-copy">
+            <h2>Smarter Valuations, Powered by Machine Learning</h2>
+            <p>
+              Our valuation engine blends historical sales data with contextual
+              factors such as renovations, neighborhood growth, and property
+              characteristics to surface a realistic price range.
+            </p>
+            <p>
+              Ready to discover what your dream home or existing property is
+              worth? Tap the button below and let the insights flow.
+            </p>
+            <a class="secondary-button" href="{{ url_for('estimate') }}">
+              Start Valuation
+            </a>
+          </div>
+          <div class="insights-stats">
+            <div class="stat-card">
+              <span class="stat-value">92%</span>
+              <span class="stat-label">Model R² Accuracy</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">$35K</span>
+              <span class="stat-label">Average Seller Gain</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">3x</span>
+              <span class="stat-label">Faster Market Decisions</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h4>House Maxify</h4>
+          <p>
+            Data-forward real estate advisors helping you move with certainty.
+          </p>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li>hello@housemaxify.com</li>
+            <li>(555) 123-4567</li>
+            <li>123 Market Street, Seattle</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span id="copyright"></span>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('js', filename='main.js') }}"></script>
+  </body>
+</html>

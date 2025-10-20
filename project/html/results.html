@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>House Maxify | Estimate Results</title>
+    <link rel="stylesheet" href="{{ url_for('css', filename='styles.css') }}" />
+  </head>
+  <body>
+    <header class="site-header compact">
+      <div class="container nav-bar">
+        <div class="brand">
+          <span class="brand-mark">HM</span>
+          <span class="brand-name">House Maxify</span>
+        </div>
+        <nav class="nav-links">
+          <a href="{{ url_for('index') }}">Home</a>
+          <a href="{{ url_for('estimate') }}">New Estimate</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="results-layout">
+      <section class="results-hero">
+        <div class="container narrow">
+          <h1>Here is your price outlook{% if lead_name %}, {{ lead_name }}{% endif %}.</h1>
+          <p class="lead">
+            Based on the information you provided and our trained XGBoost model,
+            here is the projected market range.
+          </p>
+        </div>
+      </section>
+
+      <section class="results-card">
+        <div class="container narrow">
+          <div class="estimate-card">
+            <h2>Estimated Price Range</h2>
+            <p class="estimate-value">
+              ${{ "{:,.0f}".format(price_range.low) }} – ${{ "{:,.0f}".format(price_range.high) }}
+            </p>
+            <p class="estimate-note">
+              Central estimate: ${{ "{:,.0f}".format(prediction) }}
+            </p>
+            <p class="estimate-footnote">
+              We calculate a ±7% confidence band using our historical accuracy.
+            </p>
+            <div class="actions">
+              <a class="secondary-button" href="{{ url_for('estimate') }}">
+                Run Another Estimate
+              </a>
+              <a class="cta-button outline" href="{{ url_for('index') }}">
+                Return Home
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="similar-section">
+        <div class="container narrow">
+          <h2>Similar Properties You May Like</h2>
+          <p class="section-subtitle">
+            Comparable homes pulled from our dataset to help you benchmark.
+          </p>
+          <div class="similar-grid">
+            {% for prop in similar_properties %}
+            <article class="card">
+              <h3>${{ "{:,.0f}".format(prop.price) }}</h3>
+              <ul>
+                <li>{{ prop.bedrooms }} bedrooms · {{ prop.bathrooms }} bathrooms</li>
+                <li>{{ prop.sqft_living }} sqft · Lot {{ prop.sqft_lot }} sqft</li>
+                <li>Zipcode {{ prop.zipcode }}</li>
+              </ul>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer compact">
+      <div class="container footer-content">
+        <div>
+          <h4>Next Steps</h4>
+          <p>
+            A House Maxify advisor will reach out soon with tailored
+            recommendations for your real estate goals.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; House Maxify</span>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('js', filename='main.js') }}"></script>
+  </body>
+</html>

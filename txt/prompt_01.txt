@@ -1,0 +1,87 @@
+
+You are an AI coding assistant. Generate a complete Python project based on the following requirements.
+
+⸻
+
+Project Overview
+
+This folder contains a machine learning project. The dataset is located at:
+data/kc_house_data_clean.csv
+
+There is already a trained XGBoost regression model saved at:
+xgboost_kc_house.pkl
+This is the model we will use for price predictions.
+
+Build a web-based application prototype so users can use this model to estimate house prices. Use Python (Flask or FastAPI), HTML, CSS, and JavaScript only. Keep the server-side code simple.
+
+⸻
+
+Requirements
+
+Branding & Theme
+	•	The website is for a fictional real estate company named “House Maxify”.
+	•	Create a modern, professional landing page to buy and sell houses.
+	•	Include a simple header, footer, and brand style.
+	•	Use a clean CSS design (custom or simple framework, but no heavy dependency).
+
+Landing Page
+	•	The homepage should:
+	•	Introduce House Maxify with placeholder marketing text.
+	•	Have a call-to-action button: “Get Free Price Estimate”.
+	•	Button opens a page or modal containing a property valuation form.
+
+Form Features
+
+The form must:
+	•	Collect user contact details (Name, Email, Phone) and save them in a leads.csv file.
+	•	Ask whether the user wants to Buy or Sell.
+	•	Ask property details required by the XGBoost model (e.g. bedrooms, bathrooms, sqft, year built, etc).
+	•	Use user-friendly field names (“Number of Bedrooms” instead of “bedrooms”).
+	•	Ask timeline question: Intent to buy/sell in 3/6/12 months.
+	•	After submitting, run the model to predict a price range.
+	•	Display a results page that:
+	•	Shows the predicted price range using the model.
+	•	Displays 3 similar property examples with estimated prices (your logic can define “similar”).
+
+Project Structure
+
+Use the following folder structure:
+
+/project
+  /html
+  /css
+  /js
+  /data
+  /models
+  app.py (or main server script)
+  requirements.txt
+  README.md
+
+	•	HTML files go in /html
+	•	CSS files go in /css
+	•	JS files go in /js
+	•	Model file stays in /models/xgboost_kc_house.pkl
+	•	Leads stored in /data/leads.csv
+
+⸻
+
+Server Requirements
+	•	Use Flask (preferred) or FastAPI.
+	•	Provide a script to launch the local server.
+	•	Keep backend simple and readable. No complex architecture.
+
+⸻
+
+Deliverables
+
+Generate:
+✅ Full project folder structure
+✅ All required HTML, CSS, and Python code
+✅ Form and XGBoost prediction integration
+✅ CSV lead storage
+✅ Instructions in README.md
+✅ Script to start server locally
+
+⸻
+
+Begin coding now.

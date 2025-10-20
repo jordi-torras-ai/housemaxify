@@ -1,0 +1,4 @@
+so for rating, condition, contruction grade etc, user can enter a number (with different ranges).
+I would like for the user to use dropdowns instead. 
+can you create dropdowns for me? (use your imagination to give some value to every actual number).
+Also the "Generate Price Estimate" text is too small, can i be bigger.
