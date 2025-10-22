@@ -1,15 +1,36 @@
-import pandas as pd
+import zipfile
+from pathlib import Path
+
 import numpy as np
+import pandas as pd
 
 # ===================== CONFIG =====================
-CSV_PATH = "../data/kc_house_data.csv"
-CLEAN_CSV_PATH = "../data/kc_house_data_clean.csv"
+CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "kc_house_data.csv"
+CLEAN_CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "kc_house_data_clean.csv"
 TARGET = "price"
 # ==================================================
 
 
+def ensure_csv(csv_path: Path) -> Path:
+    if not csv_path.exists():
+        raise FileNotFoundError(f"Dataset not found at {csv_path}. Run download_data.py first.")
+
+    if zipfile.is_zipfile(csv_path):
+        with zipfile.ZipFile(csv_path, "r") as archive:
+            members = [name for name in archive.namelist() if name.endswith(".csv")]
+            if not members:
+                raise ValueError(f"No CSV files found inside archive {csv_path}")
+            extracted_name = Path(members[0]).name
+            archive.extract(members[0], csv_path.parent)
+        csv_path.unlink()
+        return csv_path.with_name(extracted_name)
+
+    return csv_path
+
+
 def load_data():
-    df = pd.read_csv(CSV_PATH)
+    actual_csv = ensure_csv(CSV_PATH)
+    df = pd.read_csv(actual_csv)
     print("✅ Loaded dataset:", df.shape)
     return df
 

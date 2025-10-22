@@ -71,6 +71,15 @@ def download_csv(api: KaggleApi, output_dir: Path, force: bool) -> Path:
         quiet=False,
     )
 
+    # Kaggle sometimes sends archives without a .zip suffix (named like the original file).
+    # Detect that scenario, rename temporarily, and extract the CSV.
+    if zipfile.is_zipfile(csv_path):
+        temp_zip = csv_path.with_suffix(csv_path.suffix + ".zip")
+        csv_path.rename(temp_zip)
+        with zipfile.ZipFile(temp_zip, "r") as archive:
+            archive.extractall(output_dir)
+        temp_zip.unlink(missing_ok=True)
+
     if zip_path.exists():
         with zipfile.ZipFile(zip_path, "r") as archive:
             archive.extractall(output_dir)

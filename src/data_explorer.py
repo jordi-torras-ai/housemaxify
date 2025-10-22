@@ -1,17 +1,9 @@
 import pandas as pd
-
-# Load the dataset
-file_path = "../data/kc_house_data.csv"
-df = pd.read_csv(file_path)
-
-# Show a few rows
-print(df.head())
-
-import pandas as pd
-import numpy as np
+from pathlib import Path
+import zipfile
 
 # ========= CONFIG =========
-CSV_PATH = "../data/kc_house_data.csv"   # <-- Updated path here
+CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "kc_house_data.csv"
 TARGET = "price"
 ID_LIKE = {"id"}
 DATE_LIKE = {"date"}
@@ -82,5 +74,21 @@ def validate_for_regression(df: pd.DataFrame) -> None:
 
 # ==== CALL THE FUNCTION HERE ====
 if __name__ == "__main__":
-    df = pd.read_csv(CSV_PATH)
+    csv_path = CSV_PATH
+    if not csv_path.exists():
+        raise FileNotFoundError(f"Dataset not found at {csv_path}. Run download_data.py first.")
+
+    if zipfile.is_zipfile(csv_path):
+        # Handle case where Kaggle delivered a zip archive named like the CSV.
+        with zipfile.ZipFile(csv_path, "r") as archive:
+            members = [name for name in archive.namelist() if name.endswith(".csv")]
+            if not members:
+                raise ValueError(f"No CSV files found inside archive {csv_path}")
+            extracted_name = Path(members[0]).name
+            archive.extract(members[0], csv_path.parent)
+        csv_path.unlink()
+        csv_path = csv_path.with_name(extracted_name)
+
+    df = pd.read_csv(csv_path)
+    print(df.head())
     validate_for_regression(df)
